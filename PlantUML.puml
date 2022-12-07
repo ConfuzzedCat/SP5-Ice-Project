@@ -1,0 +1,81 @@
+@startuml
+
+class Main
+class Account
+class Checkout
+class DbIO
+class FileIO
+class JsonParser
+class MainMenu
+class MenuCard
+class Payment
+class Searcher
+class StartMenu
+class TextUI
+interface Menu
+
+Main --* Account
+Main --* Checkout
+Main --* DbIO
+Main --* TextUI
+Main --* FileIO
+Main --* MenuCard
+Main --* Payment
+Main --* Searcher
+Main --* JsonParser
+
+Menu <|-- StartMenu
+Menu <|-- MainMenu
+
+StartMenu : + public void showMenu();
+StartMenu : + public startMenu();
+StartMenu : + public goBack();
+
+Account : + public static void login(String username, String password, String email);
+Account : + public static Account register();
+Account : + private boolean tryLogin(String username, String password);
+Account : + public int getSQLID();
+Account : + Boolean isGuest
+Account : + String UserName
+Account : + String password
+Account : + String email
+Account : + private int SQLID
+
+TextUI : + public static void sendMessage(String text)
+TextUI : + public static void sendMultipleMessages(String[] lines)
+TextUI : + public static void endObjectAsMessage(Object obj);
+TextUI : + public static string getUserInputMultipleChoice(string prompt, String[] choices);
+
+Menu : + public void goBack();
+Menu : + public void showMenu();
+
+DbIO : + public void setup();
+DbIO : + public void saveAccountData();
+DbIO : + public void establishConnection();
+DbIO : + private ArrayList<Account>();
+DbIO : + private ArrayList<MenuCard> loadMenuCardData();
+
+FileIO : + scanner.File()
+FileIO : + public String[] getLinesFromFile(String path);
+FileIO : + public String getTextFromFile(String path);
+
+TextUI : + public static void sendMessage(String text)
+
+MenuCard : + public void showCatalogue(Account account);
+
+Searcher : + public boolean checkForDB();
+Searcher : + public searchCity();
+
+Checkout : + public checkoutMessage();
+
+Payment : + public boolean creditCardInfo();
+
+MainMenu : + public void goBack();
+
+
+
+
+
+
+
+@enduml
