@@ -1,10 +1,10 @@
 public class StartMenu {
     public void showMenu(){
 
-        TextUI.sendMessage("Welcome to TextFlix!");
-        TextUI.sendMessage("Please Login or Register.");
+        TextUI.sendMessage("Welcome to Five Stars Only!");
+        TextUI.sendMessage("Please Login, Register or use a guest login.");
 
-        String choice = TextUI.getUserInput("If you want to Login type: Login\nIf you want to register type: Register\nIf you want to close TextFlix type: Exit");
+        String choice = TextUI.getUserInput("If you want to Login type: Login\nIf you want to register type: Register\n If you want to use a guest login type: Guest\n If you want to close Five Stars Only type: Exit");
 
         switch(choice.toLowerCase()){
             case "login":
@@ -13,13 +13,13 @@ public class StartMenu {
                     TextUI.sendMessage("Too many incorrect tries...");
                     showMenu();
                 }
-                Main.setCurrentAccount(a);
+                Main.setCurrentAccount(a); //Er det nødvendigt da vi ikke har brug for flere users?
                 new MainMenu();
 
                 break;
 
             case "register":
-                Main.setCurrentAccount(Account.register());
+                Main.setCurrentAccount(Account.register()); //Er det nødvendigt da vi ikke har brug for flere users?
                 new MainMenu();
 
                 break;
@@ -36,7 +36,7 @@ public class StartMenu {
         this.showMenu();
     }
 
-    @Override
+
     public void goBack() {
         return;
     }
