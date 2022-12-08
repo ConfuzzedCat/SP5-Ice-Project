@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class FileIO {
 
     //Rette til
+    //Test
 
     private static ArrayList<String> readDataLines(String path) {
 

@@ -1,6 +1,7 @@
 public class CheckOut {
+    //Test
 
-    public checkoutMessage(){
+    public void checkoutMessage(){
 
     }
 }

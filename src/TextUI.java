@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 public class TextUI {
+    //Test
 
     static Scanner scan = new Scanner(System.in);
 
