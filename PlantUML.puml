@@ -24,6 +24,10 @@ Main --* Payment
 Main --* Searcher
 Main --* JsonParser
 
+Main : + public static void main(String[] args)
+Main : + private static Account currentAccount;
+Main : + public static void setCurrentAccount(Account currentAccount)
+
 Menu <|-- StartMenu
 Menu <|-- MainMenu
 
@@ -31,15 +35,21 @@ StartMenu : + public void showMenu();
 StartMenu : + public startMenu();
 StartMenu : + public goBack();
 
-Account : + public static void login(String username, String password, String email);
-Account : + public static Account register();
+Account : + private Account(String userName, String password)
+Account : + public Account(String userName, String password, String email, int id)
+Account : + public static void AddAccountToList(Account a)
+
+Account : + public static Account register(String username, String password)
+Account : + public static Account register()
+Account : + public static Account login()
 Account : + private boolean tryLogin(String username, String password);
 Account : + public int getSQLID();
 Account : + Boolean isGuest
-Account : + String UserName
+Account : + String userName
 Account : + String password
 Account : + String email
 Account : + private int SQLID
+Account : + private static ArrayList<Account> accounts = new ArrayList<>();
 
 TextUI : + public static consumeLine()
 TextUI : + public static void sendMessage(String text)
