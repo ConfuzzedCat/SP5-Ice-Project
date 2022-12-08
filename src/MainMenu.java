@@ -1,6 +1,6 @@
 public class MainMenu {
 
-    Public void goBack(){
+    public void goBack(){
 
     }
 }
