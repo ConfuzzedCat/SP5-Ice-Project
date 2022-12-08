@@ -41,10 +41,11 @@ Account : + String password
 Account : + String email
 Account : + private int SQLID
 
+TextUI : + public static consumeLine()
 TextUI : + public static void sendMessage(String text)
 TextUI : + public static void sendMultipleMessages(String[] lines)
-TextUI : + public static void endObjectAsMessage(Object obj);
-TextUI : + public static string getUserInputMultipleChoice(string prompt, String[] choices);
+TextUI : + public static void endObjectAsMessage(Object obj)
+TextUI : + public static String getUserInput(String text)
 
 Menu : + public void goBack();
 Menu : + public void showMenu();
@@ -56,8 +57,10 @@ DbIO : + private ArrayList<Account>();
 DbIO : + private ArrayList<MenuCard> loadMenuCardData();
 
 FileIO : + scanner.File()
+FileIO : + readDataLines(String path)
 FileIO : + public String[] getLinesFromFile(String path);
 FileIO : + public String getTextFromFile(String path);
+FileIO : + public void setup();
 
 TextUI : + public static void sendMessage(String text)
 
