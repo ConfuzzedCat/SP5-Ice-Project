@@ -1,4 +1,4 @@
-public class StartMenu {
+public class StartMenu implements UIMenu {
     //Test
     public void showMenu(){
 
@@ -15,13 +15,13 @@ public class StartMenu {
                     showMenu();
                 }
                 Main.setCurrentAccount(a); //Er det nødvendigt da vi ikke har brug for flere users?
-                new MainMenu();
+                new MainUIMenu();
 
                 break;
 
             case "register":
                 Main.setCurrentAccount(Account.register()); //Er det nødvendigt da vi ikke har brug for flere users?
-                new MainMenu();
+                new MainUIMenu();
 
                 break;
             case "exit":
