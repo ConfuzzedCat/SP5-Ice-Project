@@ -2,65 +2,74 @@ import java.util.ArrayList;
 //Test
 public class Account {
     private static ArrayList<Account> accounts = new ArrayList<>();
-    public String userName;
-    public String password;
-    public String email;
-    private int SQLID;
 
-    public Account(String userName, String password, String email, int id) {
-        this.userName = userName;
+    private String accountname;
+    private String password;
+    private String email;
+    private String address;
+
+    //private int SQLID; //TODO: Tilføje igen når vi laver Database
+    public Account(String accountname, String password, String email, String address) {
+        this.accountname = accountname;
         this.password = password;
         this.email = email;
-        this.SQLID = id;
+        this.address = address;
+        //this.SQLID = id; TODO: Database
     }
 
-    private Account(String userName, String password) {
-        this.userName = userName;
+    private Account(String accountname, String password) {
+        this.accountname = accountname;
         this.email = TextUI.getUserInput("Please enter your email. ");
         this.password = password;
 
         TextUI.sendMessage("Registration was successful!");
+    }
+    public static String getCSVString(Account a) {
+        return a.getAccountname() + "," + a.getPassword() + "," + a.getEmail() + "," + a.getAddress();
     }
 
     public static void AddAccountToList(Account a){
         accounts.add(a);
     }
 
-    public static Account register(String username, String password) {
-        Account newAccount = new Account(username, password);
+    public static Account register(String accountname, String password) {
+        Account newAccount = new Account(accountname, password);
         AddAccountToList(newAccount);
         return newAccount;
     }
 
     public static Account register() {
-        String username = TextUI.getUserInput("Please type your username.");
+        String accountname = TextUI.getUserInput("Please type your name.");
         String password = TextUI.getUserInput("Please type your password.");
-        Account newAccount = new Account(username, password);
+        Account newAccount = new Account(accountname, password);
         AddAccountToList(newAccount);
         return newAccount;
     }
 
 
     public static Account login(){
-        String username = TextUI.getUserInput("Please type your username.");
+        String accountname = TextUI.getUserInput("Please type your name.");
         String password = TextUI.getUserInput("Please type your password.");
+        /*
         if(Main.getIo().getClass() == DatabaseIO.class){
-            return DatabaseIO.login(username, password);
+            return DatabaseIO.login(accountname, password);
         }
+        */
+
         if( accounts == null || accounts.size() == 0){
             TextUI.sendMessage("No accounts in database, will start registering you now.");
-            return register(username, password);
+            return register(accountname, password);
         }
         for (Account a:accounts){
-            if(a.tryLogin(username, password)){
+            if(a.tryLogin(accountname, password)){
                 return a;
             }
         }
         TextUI.sendMessage("No account found. Will start register you now.");
-        return register(username, password);
+        return register(accountname, password);
     }
-    private boolean tryLogin(String username, String password){
-        if(this.userName.equalsIgnoreCase(username)){
+    private boolean tryLogin(String accountname, String password){
+        if(this.accountname.equalsIgnoreCase(accountname)){
 
             while (!this.password.equals(password)){
 
@@ -74,8 +83,42 @@ public class Account {
         return false;
 
     }
+    public String getAccountname() {
+        return accountname;
+    }
 
-        public int getSQLID () {
+    public void setAccountname(String accountname) {
+        this.accountname = accountname;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+/*
+    public int getSQLID () {
             return SQLID;
         }
+
+ */
 }

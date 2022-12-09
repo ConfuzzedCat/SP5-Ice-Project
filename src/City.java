@@ -8,7 +8,7 @@ public enum City {
 
 
 
-    public static City findCategory(String s) {
+    public static City findCity(String s) {
         switch (s.toUpperCase().replace(" ", "")) {
             case "VÆRLØSE":
                 return Værløse;

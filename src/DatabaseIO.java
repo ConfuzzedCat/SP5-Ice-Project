@@ -9,12 +9,12 @@ public class DatabaseIO implements IO{
     }
 
     @Override
-    public void saveAccountData() {
+    public void saveAccountData(ArrayList<Account> accounts) {
 
     }
 
     @Override
-    public Account loadAccountData() {
+    public ArrayList<Account> loadAccountData() {
         return null;
     }
 
