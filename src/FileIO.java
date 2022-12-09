@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class FileIO {
+public class FileIO implements IO{
 
     //Rette til
     //Test
@@ -29,6 +29,7 @@ public class FileIO {
     //Tilføje paths til pizza-place menukort (Rasmus har lavet)
     //hvor skal data bruges?
     public void setup() {
+
         ArrayList<String> data = FileIO.readDataLines("Pizzaria Ballerup.txt");
         ArrayList<String> data2 = FileIO.readDataLines("Pizzaria Aalborg.txt");
         ArrayList<String> data3 = FileIO.readDataLines("Pizzaria Snekkersten.txt");
@@ -38,5 +39,27 @@ public class FileIO {
         Catalogue.allMedia = Parser.parseDataFromCsvMedia(data);
 
 
+    }
+
+    @Override
+    public void saveAccountData() {
+
+    }
+
+    @Override
+    public Account loadAccountData() {
+        return null;
+    }
+
+    @Override
+    public ArrayList<City> loadCities() {
+        
+
+        return null;
+    }
+
+    @Override
+    public MenuCard loadMenuCard() {
+        return null;
     }
 }

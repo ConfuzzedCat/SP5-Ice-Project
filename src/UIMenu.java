@@ -1,4 +1,4 @@
-public interface Menu {
+public interface UIMenu {
         //Test
         void goBack();
 
