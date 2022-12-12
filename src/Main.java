@@ -1,5 +1,5 @@
 public class Main {
-    private static StartMenu currentMenu;
+    private static UIMenu currentMenu;
 
     //Test
     public static void main(String[] args) {
@@ -12,11 +12,11 @@ public class Main {
             Main.currentAccount = currentAccount;
     }
 
-    public static void setCurrentMenu(StartMenu currentMenu) {
+    public static void setCurrentMenu(UIMenu currentMenu) {
         Main.currentMenu = currentMenu;
     }
 
-    public static StartMenu getCurrentMenu() {
+    public static UIMenu getCurrentMenu() {
         return currentMenu;
     }
 }
