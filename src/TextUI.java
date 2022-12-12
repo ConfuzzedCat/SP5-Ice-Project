@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TextUI {
@@ -25,5 +26,18 @@ public class TextUI {
         return input;
     }
 
+    public static int getUserInput(String msg, ArrayList<String> options){
+
+        sendMessage(msg);
+
+        for(int i = 0; i<options.size(); i++){
+
+            sendMessage(i+1+". "+options.get(i));
+        }
+        int choice = scan.nextInt();
+        consumeLine();
+        return choice;
+
+    }
 
 }

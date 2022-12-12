@@ -14,18 +14,24 @@ public class StartMenu implements UIMenu {
                     TextUI.sendMessage("Too many incorrect tries...");
                     showMenu();
                 }
-                Main.setCurrentAccount(a); //Er det nødvendigt da vi ikke har brug for flere users?
+                Main.setCurrentAccount(a);
                 new MainUIMenu();
 
                 break;
 
             case "register":
-                Main.setCurrentAccount(Account.register()); //Er det nødvendigt da vi ikke har brug for flere users?
+                Main.setCurrentAccount(Account.register());
                 new MainUIMenu();
 
                 break;
             case "exit":
                 goBack();
+
+            case "guest":
+                Account g = new Account("Guest","","","");
+                Main.setCurrentAccount(g);
+                new MainUIMenu();
+                break;
 
             default:
                 TextUI.sendMessage("Invalid input.");

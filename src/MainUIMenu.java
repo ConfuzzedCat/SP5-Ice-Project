@@ -12,10 +12,10 @@ public class MainUIMenu implements UIMenu {
     @Override
     public void goBack() {
 
-        MainUIMenu.setCurrentMenu(new StartMenu());
+        Main.setCurrentMenu(new StartMenu());
     }
 
-    public void showMenu(){
+    public void showMenu() {
         TextUI.sendMessage("\nVelkommen til 5 Stars Only!\n");
 
         //Choose user currentAccount
@@ -25,7 +25,7 @@ public class MainUIMenu implements UIMenu {
 
         boolean tryAgain = true;
 
-        while(tryAgain) {
+        while (tryAgain) {
             int choice = TextUI.getUserInput("Vælg venligst: ", list);
             switch (choice) {
                 case 1:
@@ -47,4 +47,6 @@ public class MainUIMenu implements UIMenu {
                     break;
 
             }
+        }
+    }
 }

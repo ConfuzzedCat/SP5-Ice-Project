@@ -2,6 +2,7 @@ import java.util.ArrayList;
 //Test
 public class Account {
     private static ArrayList<Account> accounts = new ArrayList<>();
+    private static Account currentAccount;
 
     private String accountname;
     private String password;
@@ -14,6 +15,9 @@ public class Account {
         this.password = password;
         this.email = email;
         this.address = address;
+        if (address.isEmpty()) { //Hvis addressen er tom på vores account, så spørger vi vores metode om at udfylde den.
+            cusAddress();
+        }
         //this.SQLID = id; TODO: Database
     }
 
@@ -68,6 +72,15 @@ public class Account {
         TextUI.sendMessage("No account found. Will start register you now.");
         return register(accountname, password);
     }
+
+    public static Account getCurrentAccount() {
+        return currentAccount;
+    }
+
+    public static void setCurrentAccount(Account currentAccount) {
+        Account.currentAccount = currentAccount;
+    }
+
     private boolean tryLogin(String accountname, String password){
         if(this.accountname.equalsIgnoreCase(accountname)){
 
@@ -83,6 +96,12 @@ public class Account {
         return false;
 
     }
+
+    public void cusAddress(){
+        address = TextUI.getUserInput("Please write your address: ");
+
+    }
+
     public String getAccountname() {
         return accountname;
     }
