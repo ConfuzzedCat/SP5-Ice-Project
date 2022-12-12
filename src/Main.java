@@ -3,6 +3,7 @@ public class Main {
 
     //Test
     public static void main(String[] args) {
+        new Payment().creditCardInfo();
         new StartMenu();
     }
     private static Account currentAccount;

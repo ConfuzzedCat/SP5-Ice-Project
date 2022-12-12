@@ -39,6 +39,7 @@ public class Account {
     public static Account register(String accountname, String password) {
         Account newAccount = new Account(accountname, password);
         AddAccountToList(newAccount);
+        newAccount.cusAddress();
         return newAccount;
     }
 
