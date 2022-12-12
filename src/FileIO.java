@@ -1,8 +1,9 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
-public class FileIO implements IO{
+public class FileIO {
 
     //Rette til
     //Test
@@ -37,6 +38,7 @@ public class FileIO implements IO{
             Account.AddAccountToList(a);
         }
 
+
 /*
         Ligger et andet sted
         ArrayList<String> data = FileIO.readDataLines("Pizzaria Ballerup.txt");
@@ -53,7 +55,23 @@ public class FileIO implements IO{
 
     }
 
-    @Override
+    public ArrayList<String> returnRestaurantsOfCity(City c){
+        String path = "Data/Cities/"+c;
+        ArrayList<String> results = new ArrayList<String>();
+
+        File[] files = new File(path).listFiles();
+//If this pathname does not denote a directory, then listFiles() returns null.
+
+        for (File file : files) {
+            if (file.isFile()) {
+                results.add(file.getName().replace(".txt","")); //Fjerner .txt og tilføjer intet.
+            }
+        }
+
+        return results;
+    }
+
+    //@Override
     public void saveAccountData(ArrayList<Account> accounts) {
         try {
             // Opret en FileWriter, der skriver til den angivne fil
@@ -75,7 +93,7 @@ public class FileIO implements IO{
         }
     }
 
-    @Override
+    //@Override
     public ArrayList<Account> loadAccountData() {
         // Opret et File-objekt, der peger på den angivne fil
         File file = new File("Data/Accounts.csv");
@@ -104,10 +122,10 @@ public class FileIO implements IO{
         return accounts;
     }
 
-    @Override
+    //@Override
     public ArrayList<City> loadCities() {
         // Opret et File-objekt, der peger på filen på den angivne sti
-        File file = new File("/Data/Cities");
+        File file = new File("Data/Cities");
 
         // Brug list-metoden fra File-klassen til at få et array af strenge, hvor hver streng
         // er navnet på en undermappe i /Data/Cities-mappen. Dette array af strenge gemmes i
@@ -135,7 +153,7 @@ public class FileIO implements IO{
     }
 
 
-    @Override
+    //@Override
     public MenuCard loadMenuCard() {
 
         return null;

@@ -5,7 +5,7 @@ public class Delivery {
     public int deliveryFee(int cost) {
         String checkForDelivery = TextUI.getUserInput("Do you want delivery? The fee is 50,- \nYes or no?");
         int totalCost = cost;
-        switch (checkForDelivery) {
+        switch (checkForDelivery.toLowerCase()) {
             case "yes":
                 totalCost += 50;
                 TextUI.sendMessage("Delivery fee has been added to your order, the total is: " + totalCost);

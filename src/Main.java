@@ -1,8 +1,12 @@
+import java.io.File;
+
 public class Main {
     private static UIMenu currentMenu;
 
     //Test
     public static void main(String[] args) {
+
+        System.out.println(new FileIO().returnRestaurantsOfCity(City.findCity("Værløse")));
         new Delivery().deliveryFee(100000);
         new Payment().creditCardInfo();
         new StartMenu();

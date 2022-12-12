@@ -34,8 +34,21 @@ public class MainUIMenu implements UIMenu {
                     break;
 
                 case 2:
+
                     TextUI.sendMessage("Restauranter");
+                    City cityPicker = City.findCity("");
+
+                    String buffer = "";
+                    for(City c : City.values()){
+                        buffer += c.toString()+", ";
+                    }
+                    TextUI.sendMessage(buffer);
+                    String input = TextUI.getUserInput("Vælg en by");
+                    City searchCity = City.findCity(input);
+
                     tryAgain = false;
+
+
                     break;
                 case 3:
                     TextUI.sendMessage("Support");
