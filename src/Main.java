@@ -3,6 +3,7 @@ public class Main {
 
     //Test
     public static void main(String[] args) {
+        new Delivery().deliveryFee(100000);
         new Payment().creditCardInfo();
         new StartMenu();
     }
