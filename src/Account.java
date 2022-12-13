@@ -8,6 +8,7 @@ public class Account {
     private String password;
     private String email;
     private String address;
+    private int SQLID;
 
     //private int SQLID; //TODO: Tilføje igen når vi laver Database
     public Account(String accountname, String password, String email, String address) {
@@ -19,6 +20,16 @@ public class Account {
             cusAddress();
         }
         //this.SQLID = id; TODO: Database
+    }
+    public Account(String accountname, String password, String email, String address, int ID) {
+        this.accountname = accountname;
+        this.password = password;
+        this.email = email;
+        this.address = address;
+        if (address.isEmpty()) { //Hvis addressen er tom på vores account, så spørger vi vores metode om at udfylde den.
+            cusAddress();
+        }
+        this.SQLID = ID;
     }
 
     private Account(String accountname, String password) {
