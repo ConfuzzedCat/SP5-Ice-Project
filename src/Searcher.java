@@ -6,7 +6,7 @@ import java.util.ArrayList;
             return ioMethod.getClass() == DatabaseIO.class;
         }
 
-        public ArrayList<Dish> searchMedia(String prompt) {
+        public ArrayList<Dish> searchDishes(String prompt) {
             ArrayList<Dish> result = new ArrayList<>();
 
             if (checkForDatabase(Main.getIo())) {
@@ -14,10 +14,9 @@ import java.util.ArrayList;
                 //: spørg om det skal være film, serie eller begge.
                 String data = "%" + prompt + "%";
                 try {
-                    ResultSet resultSet = DatabaseIO.sendQuery("SELECT * FROM textflix.series WHERE NAME LIKE ?", data);
-                    //TODO fix statement
+                    ResultSet resultSet = DatabaseIO.sendQuery("SELECT * FROM fivestarsonly.dishes WHERE NAME LIKE ?", data);
 
-                    return Parser.parseSerieDataFromResultSet(resultSet);
+                    return DatabaseIO.parseDishesFromResultSet(resultSet);
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -37,4 +36,5 @@ import java.util.ArrayList;
             }
             return result;
         }
+
     }

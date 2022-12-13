@@ -198,4 +198,19 @@ public class DatabaseIO implements IO{
     public MenuCard loadMenuCard(String r) {
         return loadMenuCardData(r);
     }
+    public static ArrayList<Dish> parseDishesFromResultSet(ResultSet resultset){
+
+        ArrayList<Dish> dishes = new ArrayList<>();
+        try{
+            ResultSet resultSetDishes = resultset;
+            while(resultSetDishes.next()) {
+                Dish d = new Dish(resultSetDishes.getString("dishname"),resultSetDishes.getInt("dishcost"));
+                dishes.add(d);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return dishes;
+    }
 }
