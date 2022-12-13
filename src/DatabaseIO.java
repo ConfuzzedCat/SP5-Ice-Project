@@ -9,19 +9,19 @@ public class DatabaseIO implements IO{
         private static String DBpassword;
         private static Connection DBconnection;
 
-        public static Account login(String username, String password) {
-            String query = "SELECT * FROM textflix.accounts WHERE userName = ?";
+        public static Account login(String accountname, String password) {
+            String query = "SELECT * FROM fivestarsonly.accounts WHERE userName = ?";
             try{
 
-                ResultSet resultSet = sendQuery(query, username);
+                ResultSet resultSet = sendQuery(query, accountname);
                 if(resultSet.next()) {
                     if (resultSet.getString("password").equals(password)) {
-                        ArrayList<Account> accounts = getAccountsFromDB(sendQuery(query, username));
+                        ArrayList<Account> accounts = getAccountsFromDB(sendQuery(query, accountname));
                         TextUI.sendMessage(accounts.toString());
                         return accounts.get(0);
                     }
                     for (int i = 0; i < 3; i++) {
-                        String input = TextUI.getUserInput("Password was incorrect. Try again: ");
+                        password = TextUI.getUserInput("Password was incorrect. Try again: ");
                         if (password.equals(resultSet.getString("password"))) {
                             return getAccountsFromDB(resultSet).get(0);
                         }
@@ -49,14 +49,8 @@ public class DatabaseIO implements IO{
         public void saveAccountData() {
             Account a = Account.getCurrentAccount();
             ArrayList<String> data = new ArrayList<>(Arrays.asList(a.getAccountname(), a.getPassword(), a.getEmail(),a.getAddress()));
-            String query = "INSERT INTO textflix.accounts (users, firstName, lastName, userName, password, email) VALUES (?,?,?,?,?,?);";
-            //TODO Ændre SQL query
+            String query = "INSERT INTO fivestarsonly.accounts (accountname, password, email, address) VALUES (?,?,?,?);";
 
-            if(a.getSQLID() > 1) {
-                data.clear();
-                query = "UPDATE textflix.accounts SET users=? WHERE AccountID=?";
-                data.add(String.valueOf(a.getSQLID()));
-            }
             try{
                 int r = sendStatement(preparedQuery(query, data));
             }
@@ -74,10 +68,10 @@ public class DatabaseIO implements IO{
                 e.printStackTrace();
             }
         }
-        private ArrayList<Account> loadAccountData(){
+        public ArrayList<Account> loadAccountData(){
             ArrayList<Account> results = new ArrayList<>();
             // statement
-            String query = "SELECT * FROM textflix.accounts;";
+            String query = "SELECT * FROM fivestarsonly.accounts;";
             try {
                 ResultSet resultSet = sendQuery(query);
                 return getAccountsFromDB(resultSet);
@@ -175,7 +169,7 @@ public class DatabaseIO implements IO{
                 String password = resultSet.getString("password");
                 String email = resultSet.getString("email");
                 String address = resultSet.getString("address");
-                int sqlID = resultSet.getInt("AccountID");
+                int sqlID = resultSet.getInt("accountid");
 
                 //Arrayliste af vores media
                 Account a = new Account(accountname, password, email, address, sqlID);
@@ -188,22 +182,26 @@ public class DatabaseIO implements IO{
     }
 
     @Override
-    public void saveAccountData(ArrayList<Account> accounts) {
-
-    }
-
-
-    @Override
     public ArrayList<City> loadCities() {
-        return null;
+            String query = "SELECT * FROM fivestarsonly.cities;";
+            ArrayList<City> resultCites = new ArrayList<>();
+        try {
+            ResultSet resultSet = sendQuery(query);
+            while (resultSet.next()) {
+
+                String cityname = resultSet.getString("cityname");
+                resultCites.add(City.findCity(cityname));
+            }
+        }
+            catch(SQLException e){
+         e.printStackTrace();
+            }
+
+        return resultCites;
     }
 
     @Override
-    public MenuCard loadMenuCard() {
-        return null;
+    public MenuCard loadMenuCard(String r) {
+        return loadMenuCardData(r);
     }
-    // hej victor 8-)
-    // helo marcus B)
-    // hjælp.
-    //Test
 }
