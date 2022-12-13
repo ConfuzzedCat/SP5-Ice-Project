@@ -3,7 +3,6 @@ import java.sql.*;
 import java.util.Arrays;
 
 public class DatabaseIO implements IO{
-    //TODO: implement Methoderne!
         private static String DBhostname;
         private static String DBusername = "root";
         private static String DBpassword;
@@ -32,14 +31,9 @@ public class DatabaseIO implements IO{
             }
             return null;
         }
-//TODO FIX LOL
         public void setup(){
-            DBhostname = "jdbc:mysql://localhost/textflix?" + "autoReconnect=true&useSSL=false";
+            DBhostname = "jdbc:mysql://localhost/fivestarsonly?" + "autoReconnect=true&useSSL=false";
             establishConnection();
-            ArrayList<Media> movies = loadMovieData();
-            ArrayList<Media> series = loadSerieData();
-            movies.addAll(series);
-            Catalogue.allMedia = movies;
 
             Account.setAccounts(loadAccountData());
 
