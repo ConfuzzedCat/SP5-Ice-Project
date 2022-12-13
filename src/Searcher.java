@@ -15,6 +15,8 @@ import java.util.ArrayList;
                 String data = "%" + prompt + "%";
                 try {
                     ResultSet resultSet = DatabaseIO.sendQuery("SELECT * FROM textflix.series WHERE NAME LIKE ?", data);
+                    //TODO fix statement
+
                     return Parser.parseSerieDataFromResultSet(resultSet);
                 } catch (SQLException e) {
                     e.printStackTrace();

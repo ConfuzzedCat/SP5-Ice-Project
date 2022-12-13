@@ -32,7 +32,7 @@ public class DatabaseIO implements IO{
             }
             return null;
         }
-
+//TODO FIX LOL
         public void setup(){
             DBhostname = "jdbc:mysql://localhost/textflix?" + "autoReconnect=true&useSSL=false";
             establishConnection();
@@ -47,18 +47,18 @@ public class DatabaseIO implements IO{
 
         @Override
         public void saveAccountData() {
-            Account a = Main.getCurrentAccount();
-            ArrayList<String> data = new ArrayList<>(Arrays.asList(Parser.serializeData(a.users, false), a.firstName, a.lastName, a.userName, a.password, a.email));
+            Account a = Account.getCurrentAccount();
+            ArrayList<String> data = new ArrayList<>(Arrays.asList(a.getAccountname(), a.getPassword(), a.getEmail(),a.getAddress()));
             String query = "INSERT INTO textflix.accounts (users, firstName, lastName, userName, password, email) VALUES (?,?,?,?,?,?);";
+            //TODO Ændre SQL query
 
             if(a.getSQLID() > 1) {
                 data.clear();
                 query = "UPDATE textflix.accounts SET users=? WHERE AccountID=?";
-                data.add(Parser.serializeData(a.users, false));
                 data.add(String.valueOf(a.getSQLID()));
             }
             try{
-                int r = sendStatement(preparedQeury(query, data));
+                int r = sendStatement(preparedQuery(query, data));
             }
             catch (SQLException e){
                 e.printStackTrace();
@@ -67,9 +67,9 @@ public class DatabaseIO implements IO{
 
         private void establishConnection() {
             // connection
-            password = TextUI.getUserInput("Skriv dit MySQL server password.");
+            DBpassword = TextUI.getUserInput("Skriv dit MySQL server password.");
             try {
-                DBconnection = DriverManager.getConnection(hostname, username, password);
+                DBconnection = DriverManager.getConnection(DBhostname, DBusername, DBpassword);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -80,7 +80,7 @@ public class DatabaseIO implements IO{
             String query = "SELECT * FROM textflix.accounts;";
             try {
                 ResultSet resultSet = sendQuery(query);
-                return Parser.parseAccountDataFromResultSet(resultSet);
+                return getAccountsFromDB(resultSet);
 
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -88,44 +88,35 @@ public class DatabaseIO implements IO{
             return results;
         }
 
-        private ArrayList<Media> loadMovieData(){
-            ArrayList<Media> results = new ArrayList<>();
+        private MenuCard loadMenuCardData(String restaurantName){
+            ArrayList<Dish> dishes = new ArrayList<Dish>();
             // statement
-            String query = "SELECT * FROM textflix.movies;";
+            String query = "SELECT restaurantid FROM fivestarsonly.restaurants WHERE restaurantname = " + restaurantName + ";";
+
+
             try {
                 ResultSet resultSet = sendQuery(query);
                 while(resultSet.next()) {
-                    String Name = resultSet.getString("Name");
-                    int Years = resultSet.getInt("ReleaseYear");
-                    String stringCategory = resultSet.getString("Category");
-                    double Rating = resultSet.getDouble("Rating");
-                    //String Seasons = resultSet.getString("Seasons");
-                    ArrayList<Category> categories = Parser.getCategories(stringCategory);
+
+                    int id = resultSet.getInt("restaurantid");
 
                     //Arrayliste af vores media
-                    Media m = new Movie(Name, Years, categories, Rating);
-                    results.add(m);
+                    String queryDishes = "SELECT * FROM fivestarsonly.dishes WHERE restaurantid = "+ id +";";
+
+                    ResultSet resultSetDishes = sendQuery(queryDishes);
+                    while(resultSetDishes.next()) {
+                        Dish d = new Dish(resultSetDishes.getString("dishname"),resultSetDishes.getInt("dishcost"));
+                        dishes.add(d);
+                    }
                 }
 
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+            MenuCard results = new MenuCard(dishes,restaurantName);
             return results;
         }
 
-        private ArrayList<Media> loadSerieData(){
-            ArrayList<Media> results = new ArrayList<>();
-            // statement
-            String query = "SELECT * FROM textflix.series;";
-            try {
-                ResultSet resultSet = sendQuery(query);
-                return Parser.parseSerieDataFromResultSet(resultSet);
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            return results;
-        }
 
         public static ResultSet sendQuery(String query) throws SQLException {
             try {

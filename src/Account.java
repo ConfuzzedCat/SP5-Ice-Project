@@ -109,6 +109,14 @@ public class Account {
 
     }
 
+    public static ArrayList<Account> getAccounts() {
+        return accounts;
+    }
+
+    public int getSQLID() {
+        return SQLID;
+    }
+
     public void cusAddress(){
         address = TextUI.getUserInput("Please write your address: ");
 
