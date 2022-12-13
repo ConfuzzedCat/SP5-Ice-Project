@@ -32,9 +32,7 @@ public class MainUIMenu implements UIMenu {
                     TextUI.sendMessage("Konto-indstillinger");
                     tryAgain = false;
                     break;
-
                 case 2:
-
                     TextUI.sendMessage("Restauranter");
                     City cityPicker = City.findCity("");
 

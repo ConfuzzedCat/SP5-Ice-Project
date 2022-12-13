@@ -6,10 +6,6 @@ public class TextUI {
 
     static Scanner scan = new Scanner(System.in);
 
-    public static void sendObjectAsMessage(Object obj){
-        sendMessage(obj.toString());
-    }
-
     //**** bruges til den visuelle del af koden når den køres
     public static void sendMessage(String msg) {
         System.out.println("*********************");

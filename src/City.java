@@ -1,9 +1,8 @@
 public enum City {
     Værløse,
     Ballerup,
-    Frederiksberg,
     Aalborg,
-    Helsingør,
+    Snekkersten,
     NONE;
 
 
@@ -14,12 +13,10 @@ public enum City {
                 return Værløse;
             case "BALLERUP":
                 return Ballerup;
-            case "FREDERIKSBERG":
-                return Frederiksberg;
             case "AALBORG":
                 return Aalborg;
-            case "HELSINGØR":
-                return Helsingør;
+            case "SNEKKERSTEN":
+                return Snekkersten;
         }
         return NONE;
     }

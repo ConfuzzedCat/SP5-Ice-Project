@@ -10,7 +10,6 @@ public class Account {
     private String address;
     private int SQLID;
 
-    //private int SQLID; //TODO: Tilføje igen når vi laver Database
     public Account(String accountname, String password, String email, String address) {
         this.accountname = accountname;
         this.password = password;
@@ -19,7 +18,6 @@ public class Account {
         if (address.isEmpty()) { //Hvis addressen er tom på vores account, så spørger vi vores metode om at udfylde den.
             cusAddress();
         }
-        //this.SQLID = id; TODO: Database
     }
     public Account(String accountname, String password, String email, String address, int ID) {
         this.accountname = accountname;
@@ -66,11 +64,11 @@ public class Account {
     public static Account login(){
         String accountname = TextUI.getUserInput("Please type your name.");
         String password = TextUI.getUserInput("Please type your password.");
-        /*
+
         if(Main.getIo().getClass() == DatabaseIO.class){
             return DatabaseIO.login(accountname, password);
         }
-        */
+
 
         if( accounts == null || accounts.size() == 0){
             TextUI.sendMessage("No accounts in database, will start registering you now.");
