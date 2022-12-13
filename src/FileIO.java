@@ -17,7 +17,7 @@ public class FileIO {
         try {
             Scanner input = new Scanner(file);
             String header;
-            if(path.endsWith(".csv")){
+            if (path.endsWith(".csv")) {
                 header = input.nextLine(); // ignore header
             }
 
@@ -34,7 +34,7 @@ public class FileIO {
     //hvor skal data bruges?
     public void setup() {
 
-        for (Account a:loadAccountData()) {
+        for (Account a : loadAccountData()) {
             Account.AddAccountToList(a);
         }
 
@@ -55,8 +55,8 @@ public class FileIO {
 
     }
 
-    public ArrayList<String> returnRestaurantsOfCity(City c){
-        String path = "Data/Cities/"+c;
+    public ArrayList<String> returnRestaurantsOfCity(City c) {
+        String path = "Data/Cities/" + c;
         ArrayList<String> results = new ArrayList<String>();
 
         File[] files = new File(path).listFiles();
@@ -64,7 +64,7 @@ public class FileIO {
 
         for (File file : files) {
             if (file.isFile()) {
-                results.add(file.getName().replace(".txt","")); //Fjerner .txt og tilføjer intet.
+                results.add(file.getName().replace(".txt", "")); //Fjerner .txt og tilføjer intet.
             }
         }
 
@@ -77,7 +77,7 @@ public class FileIO {
             // Opret en FileWriter, der skriver til den angivne fil
             FileWriter writer = new FileWriter("Data/Accounts.csv");
             // Skriv en overskriftslinje til filen
-            writer.write( "accountname, password, email, address\n");
+            writer.write("accountname, password, email, address\n");
 
             // For hvert Account-objekt i accounts-ArrayList'en, kald getCSVString-metoden
             // for at få en CSV-streng med oplysningerne fra Account-objektet. Skriv
@@ -144,7 +144,7 @@ public class FileIO {
         // Iterér over arrayet af mappenavne (directories) og brug
         // findCity-metoden fra City-klassen til at oprette et City-objekt for hvert
         // mappenavn. Tilføj disse City-objekter til cities-ArrayList'en.
-        for (String s:directories) {
+        for (String s : directories) {
             cities.add(City.findCity(s));
         }
 
@@ -155,7 +155,33 @@ public class FileIO {
 
     //@Override
     public MenuCard loadMenuCardFromRestaurant(String restaurant, City c) {
+        // Opretter filen med data for restauranten i den angivne by
+        File file = new File("Data/Cities/"+ c + restaurant +".csv");
+        // Opretter en ArrayList til at indeholde retter fra filen
+        ArrayList<Dish> dishesArr = new ArrayList<>();
+        try {
+            // Opretter en Scanner-instans til at læse filen
+            Scanner input = new Scanner(file);
+            // Læser filen linje for linje
+            while (input.hasNextLine()) {
+                String line = input.nextLine();
+                // Deler hver linje i to dele adskilt af kommaet
+                String[] lineSplit = line.split(",");
 
-        return null;
+                // Konverterer prisen for retten til et heltal
+                int dishesInt = Integer.parseInt(lineSplit[1]);
+                // Opretter et Dish-objekt med navnet på retten og prisen
+                Dish d = new Dish(lineSplit[0], dishesInt);
+                // Tilføjer Dish-objektet til ArrayList'en
+                dishesArr.add(d);
+            }
+        } catch (FileNotFoundException e) {
+            // Hvis filen ikke findes, sættes dishesArr til null og exceptionen printes
+            dishesArr = null;
+            e.printStackTrace();
+        }
+        // Returnerer et nyt MenuCard-objekt oprettet med dishesArr og restaurant
+        return new MenuCard(dishesArr,restaurant);
     }
 }
+
