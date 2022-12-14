@@ -6,4 +6,5 @@ public interface IO {
     ArrayList<Account> loadAccountData();
     ArrayList<City> loadCities();
     MenuCard loadMenuCard(String r);
+    ArrayList<String> returnRestaurantsOfCity(City c);
 }

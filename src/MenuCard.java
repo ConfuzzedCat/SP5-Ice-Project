@@ -16,4 +16,19 @@ public class MenuCard {
         this.restaurantName = restaurantName;
     }
 
+    public Dish findDish(String dishName){
+        for (Dish d : dishes ) {
+        if(d.getName().equalsIgnoreCase(dishName)){
+            return d;
+        }
+        }
+
+
+        return null;
+    }
+
+    @Override
+    public String toString() {
+        return "MenuCard{" + "dishes=" + dishes + ", restaurantName='" + restaurantName + '\'' + '}'; //TODO gør pænt
+    }
 }

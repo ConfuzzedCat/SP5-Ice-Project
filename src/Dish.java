@@ -16,4 +16,9 @@ public class Dish {
     public int getCost() {
         return cost;
     }
+
+    @Override
+    public String toString() {
+        return name; //TODO Gør pænt :-)
+    }
 }

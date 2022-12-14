@@ -8,8 +8,9 @@ public class DatabaseIO implements IO{
         private static String DBpassword;
         private static Connection DBconnection;
 
+
         public static Account login(String accountname, String password) {
-            String query = "SELECT * FROM fivestarsonly.accounts WHERE userName = ?";
+            String query = "SELECT * FROM fivestarsonly.accounts WHERE accountname = ?";
             try{
 
                 ResultSet resultSet = sendQuery(query, accountname);
@@ -79,7 +80,7 @@ public class DatabaseIO implements IO{
         private MenuCard loadMenuCardData(String restaurantName){
             ArrayList<Dish> dishes = new ArrayList<Dish>();
             // statement
-            String query = "SELECT restaurantid FROM fivestarsonly.restaurants WHERE restaurantname = " + restaurantName + ";";
+            String query = "SELECT restaurantid FROM fivestarsonly.restaurants WHERE restaurantname = \"" + restaurantName + "\";";
 
 
             try {
@@ -198,6 +199,33 @@ public class DatabaseIO implements IO{
     public MenuCard loadMenuCard(String r) {
         return loadMenuCardData(r);
     }
+
+    @Override
+    public ArrayList<String> returnRestaurantsOfCity(City c) {
+        ArrayList<String> restaurants = new ArrayList<String>();
+        // statement
+        String query = "SELECT cityid FROM fivestarsonly.cities WHERE cityname = \"" + c + "\";";
+        try {
+            ResultSet resultSet = sendQuery(query);
+            while(resultSet.next()) {
+
+                int id = resultSet.getInt("cityid");
+
+                //Arrayliste af vores media
+                String queryRestaurants = "SELECT * FROM fivestarsonly.restaurants WHERE cityid = "+ id +";";
+
+                ResultSet resultSetRestaurants = sendQuery(queryRestaurants);
+                while(resultSetRestaurants.next()) {
+                    restaurants.add(resultSetRestaurants.getString("restaurantname"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return restaurants;
+    }
+
+
     public static ArrayList<Dish> parseDishesFromResultSet(ResultSet resultset){
 
         ArrayList<Dish> dishes = new ArrayList<>();

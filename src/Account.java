@@ -14,7 +14,7 @@ public class Account {
         this.password = password;
         this.email = email;
         this.address = address;
-        if (address.isEmpty()) { //Hvis addressen er tom på vores account, så spørger vi vores metode om at udfylde den.
+        if (address == null || address.isEmpty()) { //Hvis addressen er tom på vores account, så spørger vi vores metode om at udfylde den.
             cusAddress();
         }
     }
@@ -23,7 +23,7 @@ public class Account {
         this.password = password;
         this.email = email;
         this.address = address;
-        if (address.isEmpty()) { //Hvis addressen er tom på vores account, så spørger vi vores metode om at udfylde den.
+        if (address == null || address.isEmpty()) { //Hvis addressen er tom på vores account, så spørger vi vores metode om at udfylde den.
             cusAddress();
         }
         this.SQLID = ID;
@@ -33,6 +33,9 @@ public class Account {
         this.accountname = accountname;
         this.email = TextUI.getUserInput("Please enter your email. ");
         this.password = password;
+        if (address == null || address.isEmpty()) { //Hvis addressen er tom på vores account, så spørger vi vores metode om at udfylde den.
+            cusAddress();
+        }
 
         TextUI.sendMessage("Registration was successful!");
     }
