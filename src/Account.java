@@ -2,7 +2,6 @@ import java.util.ArrayList;
 //Test
 public class Account {
     private static ArrayList<Account> accounts = new ArrayList<>();
-    private static Account currentAccount;
 
     private String accountname;
     private String password;
@@ -62,7 +61,7 @@ public class Account {
 
 
     public static Account login(){
-        String accountname = TextUI.getUserInput("Please type your name.");
+        String accountname = TextUI.getUserInput("Please type an account name.");
         String password = TextUI.getUserInput("Please type your password.");
 
         if(Main.getIo().getClass() == DatabaseIO.class){
@@ -81,14 +80,6 @@ public class Account {
         }
         TextUI.sendMessage("No account found. Will start register you now.");
         return register(accountname, password);
-    }
-
-    public static Account getCurrentAccount() {
-        return currentAccount;
-    }
-
-    public static void setCurrentAccount(Account currentAccount) {
-        Account.currentAccount = currentAccount;
     }
 
     private boolean tryLogin(String accountname, String password){

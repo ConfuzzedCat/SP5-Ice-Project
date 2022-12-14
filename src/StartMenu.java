@@ -24,6 +24,7 @@ public class StartMenu implements UIMenu {
                 new MainUIMenu();
 
                 break;
+
             case "exit":
                 goBack();
 
@@ -46,8 +47,7 @@ public class StartMenu implements UIMenu {
 
 
     public void goBack() {
-
-        return;
+    Main.shutDown();
     }
 
 }

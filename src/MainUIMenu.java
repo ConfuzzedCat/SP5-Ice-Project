@@ -19,7 +19,7 @@ public class MainUIMenu implements UIMenu {
         TextUI.sendMessage("\nVelkommen til 5 Stars Only!\n");
 
         //Choose user currentAccount
-        Account a = Account.getCurrentAccount();
+        Account a = Main.getCurrentAccount();
 
         ArrayList<String> list = new ArrayList<>(Arrays.asList("Konto-indstillinger", "Restauranter", "Support", "Log ud"));
 
@@ -55,6 +55,7 @@ public class MainUIMenu implements UIMenu {
                     break;
                 default:
                     TextUI.sendMessage("Log ud");
+                    goBack();
                     break;
 
             }

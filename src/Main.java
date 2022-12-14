@@ -4,22 +4,25 @@ import java.util.ArrayList;
 public class Main {
     private static UIMenu currentMenu;
 
-
+    private static Account currentAccount;
     private static City currentCity;
     private static IO io;
 
     //Test
     public static void main(String[] args) {
-        ArrayList<Dish> dishes = new ArrayList<>();
-        dishes.add(new Dish("mad123", 100));
-        new CheckOut().checkoutMessage(dishes);
-        System.out.println(new FileIO().returnRestaurantsOfCity(City.findCity("Værløse")));
-        new Delivery().deliveryFee(100000);
-        new Payment().creditCardInfo();
-        new StartMenu();
+        io = new DatabaseIO();
+        io.setup();
+       new StartMenu();
+
+    }
+    public static void shutDown(){
+        io.saveAccountData();
+        System.exit(0);
     }
 
-    private static Account currentAccount;
+    public static Account getCurrentAccount() {
+        return currentAccount;
+    }
 
     public static void setCurrentAccount(Account currentAccount) {
         Main.currentAccount = currentAccount;

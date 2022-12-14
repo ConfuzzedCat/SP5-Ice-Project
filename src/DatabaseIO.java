@@ -41,7 +41,7 @@ public class DatabaseIO implements IO{
 
         @Override
         public void saveAccountData() {
-            Account a = Account.getCurrentAccount();
+            Account a = Main.getCurrentAccount();
             ArrayList<String> data = new ArrayList<>(Arrays.asList(a.getAccountname(), a.getPassword(), a.getEmail(),a.getAddress()));
             String query = "INSERT INTO fivestarsonly.accounts (accountname, password, email, address) VALUES (?,?,?,?);";
 
