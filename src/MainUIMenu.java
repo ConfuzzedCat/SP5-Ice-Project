@@ -34,8 +34,10 @@ public class MainUIMenu implements UIMenu {
                     showMenu();
                 case 2:
                     TextUI.sendMessage("Restauranter");
+                    ArrayList<City> cities = new ArrayList<>(Arrays.asList(City.values()));
+                    cities.remove(City.NONE);
                     String buffer = "";
-                    for(City c : City.values()){
+                    for(City c : cities){
                         buffer += c.toString()+", "; // TODO gør pænt
                     }
                     TextUI.sendMessage(buffer);
@@ -65,7 +67,8 @@ public class MainUIMenu implements UIMenu {
                     break;
                 case 3:
                     TextUI.sendMessage("Support");
-                    new StartMenu(); // logout
+                    TextUI.sendMessage("For at kontakte os på support, kan du enten:\nRinge til os på: +45 00 00 00 00\nEller sende en email på: FiveStarsOnly@noreply.com");
+                    showMenu();
                     tryAgain = false;
                     break;
                 default:

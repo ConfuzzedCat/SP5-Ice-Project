@@ -17,7 +17,6 @@ public class DatabaseIO implements IO{
                 if(resultSet.next()) {
                     if (resultSet.getString("password").equals(password)) {
                         ArrayList<Account> accounts = getAccountsFromDB(sendQuery(query, accountname));
-                        TextUI.sendMessage(accounts.toString());
                         return accounts.get(0);
                     }
                     for (int i = 0; i < 3; i++) {
@@ -43,6 +42,9 @@ public class DatabaseIO implements IO{
         @Override
         public void saveAccountData() {
             Account a = Main.getCurrentAccount();
+            if(a.getAccountname().equalsIgnoreCase("Guest")){
+                return;
+            }
             ArrayList<String> data = new ArrayList<>(Arrays.asList(a.getAccountname(), a.getPassword(), a.getEmail(),a.getAddress()));
             String query = "INSERT INTO fivestarsonly.accounts (accountname, password, email, address) VALUES (?,?,?,?);";
 
@@ -52,6 +54,7 @@ public class DatabaseIO implements IO{
             catch (SQLException e){
                 e.printStackTrace();
             }
+
         }
 
         private void establishConnection() {

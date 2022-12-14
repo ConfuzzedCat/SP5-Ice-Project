@@ -13,6 +13,7 @@ public class Main {
         io = new DatabaseIO();
         io.setup();
        new StartMenu();
+       shutDown();
 
     }
     public static void shutDown(){

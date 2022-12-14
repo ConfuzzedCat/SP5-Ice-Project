@@ -73,6 +73,9 @@ public class FileIO {
 
     //@Override
     public void saveAccountData(ArrayList<Account> accounts) {
+        if(Main.getCurrentAccount().getAccountname().equalsIgnoreCase("Guest")){
+            return;
+        }
         try {
             // Opret en FileWriter, der skriver til den angivne fil
             FileWriter writer = new FileWriter("Data/Accounts.csv");

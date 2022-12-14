@@ -8,13 +8,14 @@ public class CheckOut {
     int sum = 0;
     String dishNames = "";
         for (Dish d: checkoutDishes) {
-    sum += d.getCost();
-    dishNames += d.getName() + ", ";
-
-    sum = Delivery.deliveryFee(sum);
-    TextUI.sendMessage("Du har bestilt: "+ dishNames + ".\nDin total pris er: " + sum + "\nTak for din bestilling." + "(Ordrenummer: " + randomUUID() +").");
-
+            sum += d.getCost();
+            dishNames += d.getName() + ", ";
         }
+    sum = Delivery.deliveryFee(sum);
+    if(Delivery.delivery){
+        TextUI.sendMessage("Du har bestilt: "+ dishNames + "til denne adresse: " + Main.getCurrentAccount().getAddress() +"\nDin total pris er: " + sum + "\nTak for din bestilling." + "(Ordrenummer: " + randomUUID() +").");
+    return;
     }
-
+        TextUI.sendMessage("Du har bestilt: "+ dishNames + "til afhentning, maden er klar om et kvarter.\nDin total pris er: " + sum + "\nTak for din bestilling." + "(Ordrenummer: " + randomUUID() +").");
+    }
 }
