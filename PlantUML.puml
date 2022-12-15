@@ -3,10 +3,12 @@
 class Main
 class Account
 class Checkout
-class DbIO
+enum City
+class DatabaseIO
+class Delivery
+class Dish
 class FileIO
-class JsonParser
-class MainMenu
+class MainUIMenu
 class MenuCard
 class Payment
 class Searcher
@@ -16,13 +18,17 @@ interface Menu
 
 Main --* Account
 Main --* Checkout
-Main --* DbIO
+Main --* City
+Main --* DatabaseIO
+Main --* Delivery
+Main --* Dish
+Main --* MainUIMenu
 Main --* TextUI
 Main --* FileIO
 Main --* MenuCard
 Main --* Payment
 Main --* Searcher
-Main --* JsonParser
+Main --* TextUI
 
 Main : + public static void main(String[] args)
 Main : + private static Account currentAccount;
@@ -34,21 +40,34 @@ Menu <|-- MainMenu
 StartMenu : + public void showMenu();
 StartMenu : + public void goBack();
 
-Account : + private Account(String userName, String password)
-Account : + public Account(String userName, String password, String email, int id)
+Account : + public Account(String accountname, String password, String email, String address)
+Account : + public Account(String accountname, String password, String email, String address, int id)
 Account : + public static void AddAccountToList(Account a)
+Account : + public static String getCSVString(Account a)
 
-Account : + public static Account register(String username, String password)
+Account : + public Account register(String , String password)
 Account : + public static Account register()
 Account : + public static Account login()
+Account : + public String getAccountname()
+Account : + public void setAccountname(String accountname)
+Account : + public String getPassword()
+Account : + public void setPassword(String password)
+Account : + public String getEmail()
+Account : + public void setEmail(String email
 Account : + private boolean tryLogin(String username, String password);
+Account : + public static void setAccounts(ArrayList<Account>
 Account : + public int getSQLID();
-Account : + Boolean isGuest
-Account : + String userName
-Account : + String password
-Account : + String email
-Account : + private int SQLID
-Account : + private static ArrayList<Account> accounts = new ArrayList<>();
+Account : + public void cusAddress()
+Account :  Boolean isGuest
+Account :  String userName
+Account :  String password
+Account :  String email
+Account :  private int SQLID
+Account :  private static ArrayList<Account> accounts = new ArrayList<>();
+
+Checkout : + public checkoutMessage()
+
+City : + public static City findCity(String s)
 
 TextUI : + public static consumeLine()
 TextUI : + public static void sendMessage(String text)
@@ -59,26 +78,60 @@ TextUI : + public static String getUserInput(String text)
 Menu : + public void goBack();
 Menu : + public void showMenu();
 
-DbIO : + public void setup();
-DbIO : + public void saveAccountData();
-DbIO : + public void establishConnection();
-DbIO : + private ArrayList<Account>();
-DbIO : + private ArrayList<MenuCard> loadMenuCardData();
+DatabaseIO : + public static Account login(String accountname, String password)
+DatabaseIO : + public void setup();
+DatabaseIO : + public void saveAccountData();
+DatabaseIO : + public void establishConnection();
+DatabaseIO : + private ArrayList<Account>();
+DatabaseIO : + private ArrayList<MenuCard> loadMenuCardData();
+DatabaseIO : + public ArrayList<Account> loadAccountData()
+DatabaseIO : + public static ResultSet sendQuery(String query)
+DatabaseIO : + public static int sendStatement(PreparedStatement statement)
+DatabaseIO : + public static ResultSet sendQuery(String query, String data)
+DatabaseIO : + public static PreparedStatement preparedQuery(String query, ArrayList<String> data)
+DatabaseIO : + private static ArrayList<Account> getAccountsFromDB(ResultSet resultSet)
+DatabaseIO : + public ArrayList<City> loadCities()
+DatabaseIO : + public static ArrayList<Dish> parseDishesFromResultSet(ResultSet resultset)
+DatabaseIO : private static String DBhostname;
+DatabaseIO : private static String DBusername;
+DatabaseIO : private static String DBpassword;
+DatabaseIO : private static Connection DBconnection;
 
-FileIO : + scanner.File()
-FileIO : + readDataLines(String path)
-FileIO : + public String[] getLinesFromFile(String path);
-FileIO : + public String getTextFromFile(String path);
-FileIO : + public void setup();
+Delivery : + public static int deliveryFee(int cost)
+Delivery : public static boolean delivery
+
+Dish : + public Dish(String name, int cost)
+Dish : + private String getName()
+Dish : + private int getCost()
+Dish : + public String toString
+Dish : private String name
+Dish : private int cost
+
+FileIO : + public ArrayList<String> returnRestaurantsOfCity(City c)
+FileIO : + public void saveAccountData(ArrayList<Account> accounts)
+FileIO : + public ArrayList<Account> loadAccountData()
+FileIO : + public ArrayList<City> loadCities()
+FileIO : + public boolean accept(File current, String name)
+FileIO : + public MenuCard loadMenuCardFromRestaurant(String restaurant, City c)
+
+MainUIMenu : + public MainUIMenu()
+MainUIMenu : + public void goBack()
+MainUIMenu : + public void showMenu()
+
+MenuCard : + public void showCatalogue(Account account);
+MenuCard : + public ArrayList<Dish> getDishes()
+MenuCard : + public String getRestaurantName()
+MenuCard : + public MenuCard(ArrayList<Dish> dishes, String restaurantName)
+MenuCard : + public Dish findDish(String dishName)
+MenuCard : + public String toString()
+MenuCard : private ArrayList<Dish> dishes
+MenuCard : private String restaurantName
 
 TextUI : + public static void sendMessage(String text)
 
-MenuCard : + public void showCatalogue(Account account);
 
 Searcher : + public boolean checkForDB();
 Searcher : + public searchCity();
-
-Checkout : + public checkoutMessage();
 
 Payment : + public boolean creditCardInfo();
 

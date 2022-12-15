@@ -6,9 +6,11 @@ public class MenuCard {
     private String restaurantName;
 
     public ArrayList<Dish> getDishes() {
+
         return dishes;
     }
     public String getRestaurantName() {
+
         return restaurantName;
     }
     public MenuCard(ArrayList<Dish> dishes, String restaurantName) {
