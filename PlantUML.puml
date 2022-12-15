@@ -73,9 +73,6 @@ TextUI : + public static void sendMultipleMessages(String[] lines)
 TextUI : + public static void endObjectAsMessage(Object obj)
 TextUI : + public static String getUserInput(String text)
 
-Menu : + public void goBack();
-Menu : + public void showMenu();
-
 DatabaseIO : + public static Account login(String accountname, String password)
 DatabaseIO : + public void setup();
 DatabaseIO : + public void saveAccountData();
