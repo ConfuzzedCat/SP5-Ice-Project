@@ -1,0 +1,24 @@
+"dishid","restaurantid","dishname","dishcost"
+1,1,"Hawaii",50
+2,1,"Pepperoni",50
+3,1,"Salatpizza",60
+4,1,"Kebabtallerken",45
+5,1,"Ekstra Ost",75
+6,2,"Skinke",50
+7,2,"Pepperoni",50
+8,2,"Margherita",50
+9,2,"Vesuvio",45
+10,2,"Hawaii",55
+11,2,"Kebab Salatpizza",75
+12,3,"Margherita",55
+13,3,"Vesuvio",60
+14,3,"Amerikansk",60
+15,3,"Bolognese",72
+16,3,"Bearnaise",75
+17,4,"Vinterkassen",327
+18,4,"Sushi. Joy",203
+19,4,"Børnemenu",88
+20,4,"Crispy Menu",124
+21,4,"Yakisoba menu",139
+22,4,"Hot menu",415
+23,4,"Vegi menu",159

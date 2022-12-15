@@ -1,0 +1,27 @@
+CREATE DATABASE `fivestarsonly` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE TABLE `accounts` (
+  `accountname` text,
+  `password` text,
+  `email` text,
+  `address` text,
+  `accountid` int NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`accountid`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `cities` (
+  `cityid` int NOT NULL AUTO_INCREMENT,
+  `cityname` varchar(100) NOT NULL,
+  PRIMARY KEY (`cityid`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `dishes` (
+  `dishid` int NOT NULL AUTO_INCREMENT,
+  `restaurantid` int NOT NULL,
+  `dishname` varchar(100) NOT NULL,
+  `dishcost` int NOT NULL,
+  PRIMARY KEY (`dishid`)
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `restaurants` (
+  `restaurantid` int NOT NULL AUTO_INCREMENT,
+  `restaurantname` varchar(100) NOT NULL,
+  `cityid` varchar(100) NOT NULL,
+  PRIMARY KEY (`restaurantid`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
