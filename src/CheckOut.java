@@ -13,9 +13,9 @@ public class CheckOut {
         }
     sum = Delivery.deliveryFee(sum);
     if(Delivery.delivery){
-        TextUI.sendMessage("Du har bestilt: "+ dishNames + "til denne adresse: " + Main.getCurrentAccount().getAddress() +"\nDin total pris er: " + sum + "\nTak for din bestilling. " + "(Ordrenummer: " + randomUUID() +").");
+        TextUI.sendMessage("You have ordered: "+ dishNames + "To this address: " + Main.getCurrentAccount().getAddress() +"\nThe total is: " + sum + "\nThank you for choosing us. " + "(Order number: " + randomUUID() +").");
     return;
     }
-        TextUI.sendMessage("Du har bestilt: "+ dishNames + "til afhentning, maden er klar om et kvarter.\nDin total pris er: " + sum + "\nTak for din bestilling. " + "(Ordrenummer: " + randomUUID() +").");
+        TextUI.sendMessage("You have ordered: "+ dishNames + "To afhentning, maden er klar om et kvarter.\nDin total pris er: " + sum + "\nThank you for choosing us. " + "(Order number: " + randomUUID() +").");
     }
 }

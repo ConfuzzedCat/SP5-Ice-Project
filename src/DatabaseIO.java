@@ -59,7 +59,7 @@ public class DatabaseIO implements IO{
 
         private void establishConnection() {
             // connection
-            DBpassword = TextUI.getUserInput("Skriv dit MySQL server password.");
+            DBpassword = TextUI.getUserInput("Write your MySQL server password.");
             try {
                 DBconnection = DriverManager.getConnection(DBhostname, DBusername, DBpassword);
             } catch (SQLException e) {

@@ -18,24 +18,24 @@ public class MainUIMenu implements UIMenu {
     }
 
     public void showMenu() {
-        TextUI.sendMessage("\nVelkommen til 5 Stars Only!\n");
+        TextUI.sendMessage("\nWelcome to 5 Stars Only!\n");
 
         //Choose user currentAccount
         Account a = Main.getCurrentAccount();
 
-        ArrayList<String> list = new ArrayList<>(Arrays.asList("Konto-indstillinger", "Restauranter", "Support", "Log ud"));
+        ArrayList<String> list = new ArrayList<>(Arrays.asList("Account settings", "Restaurants", "Support", "Log out"));
 
         boolean tryAgain = true;
 
         while (tryAgain) {
-            int choice = TextUI.getUserInput("Vælg venligst: ", list);
+            int choice = TextUI.getUserInput("Please choose one: ", list);
             switch (choice) {
                 case 1:
-                    TextUI.sendMessage("Konto-indstillinger");
+                    TextUI.sendMessage("Account settings");
                     TextUI.sendMessage("Account settings is not available at this moment.");
                     showMenu();
                 case 2:
-                    TextUI.sendMessage("Restauranter");
+                    TextUI.sendMessage("Restaurants");
                     ArrayList<City> cities = new ArrayList<>(Arrays.asList(City.values()));
                     cities.remove(City.NONE);
                     String buffer = "";
@@ -94,12 +94,12 @@ public class MainUIMenu implements UIMenu {
                     break;
                 case 3:
                     TextUI.sendMessage("Support");
-                    TextUI.sendMessage("For at kontakte os på support, kan du enten:\nRinge til os på: +45 00 00 00 00\nEller sende en email på: noreply@FiveStarsOnly.com");
+                    TextUI.sendMessage("To reach our support, please use the following channels:\nCall us at: +45 00 00 00 00\nSend an e-mail to: noreply@FiveStarsOnly.com");
                     showMenu();
                     tryAgain = false;
                     break;
                 default:
-                    TextUI.sendMessage("Log ud");
+                    TextUI.sendMessage("Log out");
                     goBack();
                     break;
 
