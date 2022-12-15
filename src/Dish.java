@@ -19,6 +19,6 @@ public class Dish {
 
     @Override
     public String toString() {
-        return name; //TODO Gør pænt :-)
+        return "[" + name + "]"+ " - " +cost + " kr.";
     }
 }

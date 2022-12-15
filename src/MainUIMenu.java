@@ -40,8 +40,10 @@ public class MainUIMenu implements UIMenu {
                     cities.remove(City.NONE);
                     String buffer = "";
                     for(City c : cities){
-                        buffer += c.toString()+", "; // TODO gør pænt
+                        buffer += c.toString()+", ";
                     }
+                    buffer = buffer.substring(0,buffer.length()-2);
+
                     TextUI.sendMessage(buffer);
                     ArrayList<String> restaurants;
                     do {
@@ -54,8 +56,9 @@ public class MainUIMenu implements UIMenu {
                     }while (restaurants == null || restaurants.size() == 0);
                     buffer = "";
                     for(String s : restaurants){
-                        buffer += s + ", "; // TODO gør pænt
+                        buffer += s + ", ";
                     }
+                    buffer = buffer.substring(0,buffer.length()-2);
                     TextUI.sendMessage(buffer);
                     MenuCard menu;
                     do {
@@ -67,8 +70,9 @@ public class MainUIMenu implements UIMenu {
                     }while (menu == null || menu.getDishes().size() == 0);
                     buffer = "";
                     for(Dish d : menu.getDishes()){
-                        buffer += d.toString() + ", "; // TODO gør pænt
+                        buffer += d.toString() + "\n";
                     }
+                    buffer = buffer.substring(0,buffer.length()-1);
                     TextUI.sendMessage(buffer);
                     ArrayList<Dish> dishes = new ArrayList<>();
                     String input = "";
@@ -83,7 +87,7 @@ public class MainUIMenu implements UIMenu {
                             }
                         }
                     } while(!input.equalsIgnoreCase("order"));
-                    //TODO Skriv at maden ikke findes i den restaurant
+
                     new CheckOut().checkoutMessage(dishes);
 
                     tryAgain = false;

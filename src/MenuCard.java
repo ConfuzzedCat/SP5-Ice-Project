@@ -28,9 +28,4 @@ public class MenuCard {
 
         return null;
     }
-
-    @Override
-    public String toString() {
-        return "MenuCard{" + "dishes=" + dishes + ", restaurantName='" + restaurantName + '\'' + '}'; //TODO gør pænt
-    }
 }
