@@ -32,11 +32,20 @@ Main --* StartMenu
 Main --* TextUI
 
 IO <|-- FileIO : is a
-IO <|-- DatabaseIOIO : is a
+IO <|-- DatabaseIO : is a
 
 UiMenu <|-- MainUIMenu
 UiMenu <|-- StartMenu
 
+IO : + void setup()
+IO : + void saveAccountData()
+IO : + ArrayList<Account> loadAccountData()
+IO : + ArrayList<City> loadCities()
+IO : + MenuCard loadMenuCard(String r)
+IO : + ArrayList<String> returnRestaurantsOfCity(city c)
+
+UiMenu : + void goBack()
+UiMenu : + void showMenu()
 
 Account : + public Account(String accountname, String password, String email, String address)
 Account : + public Account(String accountname, String password, String email, String address, int id)
@@ -72,9 +81,6 @@ TextUI : + public static void sendMessage(String text)
 TextUI : + public static void sendMultipleMessages(String[] lines)
 TextUI : + public static void endObjectAsMessage(Object obj)
 TextUI : + public static String getUserInput(String text)
-
-Menu : + public void goBack();
-Menu : + public void showMenu();
 
 DatabaseIO : + public static Account login(String accountname, String password)
 DatabaseIO : + public void setup();
