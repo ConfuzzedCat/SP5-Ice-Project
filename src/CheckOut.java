@@ -16,6 +16,6 @@ public class CheckOut {
         TextUI.sendMessage("Du har bestilt: "+ dishNames + "til denne adresse: " + Main.getCurrentAccount().getAddress() +"\nDin total pris er: " + sum + "\nTak for din bestilling." + "(Ordrenummer: " + randomUUID() +").");
     return;
     }
-        TextUI.sendMessage("Du har bestilt: "+ dishNames + "til afhentning, maden er klar om et kvarter.\nDin total pris er: " + sum + "\nTak for din bestilling." + "(Ordrenummer: " + randomUUID() +").");
+        TextUI.sendMessage("Du har bestilt: "+ dishNames + "til afhentning, maden er klar om et kvarter.\nDin total pris er: " + sum + "\nTak for din bestilling. " + "(Ordrenummer: " + randomUUID() +").");
     }
 }

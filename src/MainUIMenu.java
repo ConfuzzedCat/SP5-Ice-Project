@@ -1,3 +1,5 @@
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -46,8 +48,10 @@ public class MainUIMenu implements UIMenu {
                         String input = TextUI.getUserInput("Pick a city");
                         City searchCity = City.findCity(input);
                         restaurants = Main.getIo().returnRestaurantsOfCity(searchCity);
+                        if(restaurants == null || restaurants.size() == 0){
+                            TextUI.sendMessage("City not found, try again.");
+                        }
                     }while (restaurants == null || restaurants.size() == 0);
-                    //TODO Skriv at byen ikke findes
                     buffer = "";
                     for(String s : restaurants){
                         buffer += s + ", "; // TODO gør pænt
@@ -57,8 +61,10 @@ public class MainUIMenu implements UIMenu {
                     do {
                         String input = TextUI.getUserInput("Pick a restaurant");
                         menu = Main.getIo().loadMenuCard(input);
+                        if(menu == null || menu.getDishes().size() == 0){
+                            TextUI.sendMessage("Restaurant not found, try again.");
+                        }
                     }while (menu == null || menu.getDishes().size() == 0);
-                    //TODO Skriv at restaurant ikke findes
                     buffer = "";
                     for(Dish d : menu.getDishes()){
                         buffer += d.toString() + ", "; // TODO gør pænt
@@ -72,6 +78,8 @@ public class MainUIMenu implements UIMenu {
                             Dish d = menu.findDish(input);
                             if(d != null) {
                                 dishes.add(d);
+                            }else{
+                                TextUI.sendMessage("Dish not found, try again.");
                             }
                         }
                     } while(!input.equalsIgnoreCase("order"));
