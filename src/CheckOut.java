@@ -12,10 +12,15 @@ public class CheckOut {
             dishNames += d.getName() + ", ";
         }
     sum = Delivery.deliveryFee(sum);
-    if(Delivery.delivery){
-        TextUI.sendMessage("You have ordered: "+ dishNames + "To this address: " + Main.getCurrentAccount().getAddress() +"\nThe total is: " + sum + "\nThank you for choosing us. " + "(Order number: " + randomUUID() +").");
-    return;
-    }
-        TextUI.sendMessage("You have ordered: "+ dishNames + "please collect the food, it is ready in 15 minutes.\nThe total is: " + sum + "\nThank you for choosing us. " + "(Order number: " + randomUUID() +").");
-    }
+        if(new Payment().creditCardInfo()){
+            if(Delivery.delivery){
+                TextUI.sendMessage("You have ordered: "+ dishNames + "To this address: " + Main.getCurrentAccount().getAddress() +"\nThe total is: " + sum + "\nThank you for choosing us. " + "(Order number: " + randomUUID() +").");
+                return;
+            }
+            TextUI.sendMessage("You have ordered: "+ dishNames + "please collect the food, it is ready in 15 minutes.\nThe total is: " + sum + "\nThank you for choosing us. " + "(Order number: " + randomUUID() +").");
+        return;
+        }
+        TextUI.sendMessage("Payment failed, try again.");
+
+        }
 }
