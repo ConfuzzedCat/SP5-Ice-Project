@@ -8,7 +8,7 @@ public class TextUI {
 
     //**** bruges til den visuelle del af koden når den køres
     public static void sendMessage(String msg) {
-        System.out.println("*********************");
+        System.out.println("⭐⭐⭐⭐⭐");
         System.out.println(msg);
     }
 
