@@ -29,8 +29,7 @@ public class StartMenu implements UIMenu {
                 goBack();
 
             case "guest":
-                Account g = new Account("Guest","","","");
-                Main.setCurrentAccount(g);
+                Main.setCurrentAccount(Account.guestLogin());
                 new MainUIMenu();
                 break;
 

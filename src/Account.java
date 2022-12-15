@@ -100,6 +100,22 @@ public class Account {
         return false;
 
     }
+    public static Account guestLogin(){
+        String accountName = TextUI.getUserInput("Please type your name.");
+        String accountLastname = TextUI.getUserInput("Please type your last name.");
+        String email = TextUI.getUserInput("Please enter your email.");
+        Account a = new Account("Guest",email, 1);
+
+        return a;
+    }
+
+    private Account(String accountName, String email, int i) {
+        this.accountname = accountName;
+        this.email = email;
+        if (address == null || address.isEmpty()) { //Hvis addressen er tom på vores account, så spørger vi vores metode om at udfylde den.
+            cusAddress();
+        }
+    }
 
     public static void setAccounts(ArrayList<Account> accounts) {
         Account.accounts = accounts;

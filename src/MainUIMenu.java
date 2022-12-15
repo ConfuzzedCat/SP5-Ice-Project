@@ -41,33 +41,48 @@ public class MainUIMenu implements UIMenu {
                         buffer += c.toString()+", "; // TODO gør pænt
                     }
                     TextUI.sendMessage(buffer);
-                    String input = TextUI.getUserInput("Pick a city");
-                    City searchCity = City.findCity(input);
-                    ArrayList<String> restaurants = Main.getIo().returnRestaurantsOfCity(searchCity);
-
+                    ArrayList<String> restaurants;
+                    do {
+                        String input = TextUI.getUserInput("Pick a city");
+                        City searchCity = City.findCity(input);
+                        restaurants = Main.getIo().returnRestaurantsOfCity(searchCity);
+                    }while (restaurants == null || restaurants.size() == 0);
+                    //TODO Skriv at byen ikke findes
                     buffer = "";
                     for(String s : restaurants){
                         buffer += s + ", "; // TODO gør pænt
                     }
                     TextUI.sendMessage(buffer);
-                    input = TextUI.getUserInput("Pick a restaurant");
-                    MenuCard menu = Main.getIo().loadMenuCard(input);
-
+                    MenuCard menu;
+                    do {
+                        String input = TextUI.getUserInput("Pick a restaurant");
+                        menu = Main.getIo().loadMenuCard(input);
+                    }while (menu == null || menu.getDishes().size() == 0);
+                    //TODO Skriv at restaurant ikke findes
                     buffer = "";
                     for(Dish d : menu.getDishes()){
                         buffer += d.toString() + ", "; // TODO gør pænt
                     }
                     TextUI.sendMessage(buffer);
-                    input = TextUI.getUserInput("What do you want to order?");
                     ArrayList<Dish> dishes = new ArrayList<>();
-                    dishes.add(menu.findDish(input));
+                    String input = "";
+                    do {
+                        input = TextUI.getUserInput("What do you want to order? When you're done ordering type: order");
+                        if(!input.equalsIgnoreCase("order")) {
+                            Dish d = menu.findDish(input);
+                            if(d != null) {
+                                dishes.add(d);
+                            }
+                        }
+                    } while(!input.equalsIgnoreCase("order"));
+                    //TODO Skriv at maden ikke findes i den restaurant
                     new CheckOut().checkoutMessage(dishes);
 
                     tryAgain = false;
                     break;
                 case 3:
                     TextUI.sendMessage("Support");
-                    TextUI.sendMessage("For at kontakte os på support, kan du enten:\nRinge til os på: +45 00 00 00 00\nEller sende en email på: FiveStarsOnly@noreply.com");
+                    TextUI.sendMessage("For at kontakte os på support, kan du enten:\nRinge til os på: +45 00 00 00 00\nEller sende en email på: noreply@FiveStarsOnly.com");
                     showMenu();
                     tryAgain = false;
                     break;
