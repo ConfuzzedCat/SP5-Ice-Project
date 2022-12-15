@@ -8,13 +8,14 @@ class DatabaseIO
 class Delivery
 class Dish
 class FileIO
+interface IO
 class MainUIMenu
 class MenuCard
 class Payment
 class Searcher
 class StartMenu
 class TextUI
-interface Menu
+interface UiMenu
 
 Main --* Account
 Main --* Checkout
@@ -22,23 +23,20 @@ Main --* City
 Main --* DatabaseIO
 Main --* Delivery
 Main --* Dish
-Main --* MainUIMenu
-Main --* TextUI
 Main --* FileIO
+Main --* MainUIMenu
 Main --* MenuCard
 Main --* Payment
 Main --* Searcher
+Main --* StartMenu
 Main --* TextUI
 
-Main : + public static void main(String[] args)
-Main : + private static Account currentAccount;
-Main : + public static void setCurrentAccount(Account currentAccount)
+IO <|-- FileIO : is a
+IO <|-- DatabaseIOIO : is a
 
-Menu <|-- StartMenu
-Menu <|-- MainMenu
+UiMenu <|-- MainUIMenu
+UiMenu <|-- StartMenu
 
-StartMenu : + public void showMenu();
-StartMenu : + public void goBack();
 
 Account : + public Account(String accountname, String password, String email, String address)
 Account : + public Account(String accountname, String password, String email, String address, int id)
@@ -114,6 +112,21 @@ FileIO : + public ArrayList<City> loadCities()
 FileIO : + public boolean accept(File current, String name)
 FileIO : + public MenuCard loadMenuCardFromRestaurant(String restaurant, City c)
 
+Main : + public static void main(String[] args)
+Main : + public static void shutDown()
+Main : + public static Account currentAccount;
+Main : + public static void setCurrentAccount(Account currentAccount)
+Main : + public static void setCurrentMenu(UIMenu currentMenu)
+Main : + public static UIMenu currentMenu()
+Main : + public static City getCurrentCity()
+Main : + public static void setCurrentCity(City currentCity)
+Main : + public static IO getIo()
+Main : + public static void setIo(IO io)
+Main : private static UIMenu currentMenu
+Main : private static Account currentAccount
+Main : private static City currentCity
+Main : private static IO io
+
 MainUIMenu : + public MainUIMenu()
 MainUIMenu : + public void goBack()
 MainUIMenu : + public void showMenu()
@@ -127,19 +140,18 @@ MenuCard : + public String toString()
 MenuCard : private ArrayList<Dish> dishes
 MenuCard : private String restaurantName
 
-TextUI : + public static void sendMessage(String text)
-
-
-Searcher : + public boolean checkForDB();
-Searcher : + public searchCity();
-
 Payment : + public boolean creditCardInfo();
 
-MainMenu : + public void goBack();
-MainMenu : + public void showMenu();
+Searcher : + public boolean checkForDatabase();
 
+StartMenu : + public void showMenu()
+StartMenu : + public StartMenu()
+StartMenu : + public void goBack()
 
-
+TextUI : + public static void sendMessage(String msg)
+TextUI : + public static void consumeLine()
+TextUI : + public static int getUserInput(String msg, ArrayList<String> options)
+TextUI : + static Scanner scan = new Scanner(System.in)
 
 
 

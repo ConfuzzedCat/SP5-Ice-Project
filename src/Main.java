@@ -22,34 +22,42 @@ public class Main {
     }
 
     public static Account getCurrentAccount() {
+
         return currentAccount;
     }
 
     public static void setCurrentAccount(Account currentAccount) {
+
         Main.currentAccount = currentAccount;
     }
 
     public static void setCurrentMenu(UIMenu currentMenu) {
+
         Main.currentMenu = currentMenu;
     }
 
     public static UIMenu getCurrentMenu() {
+
         return currentMenu;
     }
 
     public static City getCurrentCity() {
+
         return currentCity;
     }
 
     public static void setCurrentCity(City currentCity) {
+
         Main.currentCity = currentCity;
     }
 
     public static IO getIo() {
+
         return io;
     }
 
     public static void setIo(IO io) {
+
         Main.io = io;
     }
 }
