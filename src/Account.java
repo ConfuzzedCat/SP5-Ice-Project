@@ -9,6 +9,11 @@ public class Account {
     private String address;
     private int SQLID;
 
+    //RASMUS:
+    //Hvorfor er der lavet 3 constructors?
+    //Svar: Fordi nogle af Account-metoderne kun har brug for VISSE parametre, og ikke nødvendigvis alle.
+    //Derfor laves der flere constructors.
+
     public Account(String accountname, String password, String email, String address) {
         this.accountname = accountname;
         this.password = password;
@@ -71,6 +76,9 @@ public class Account {
             return DatabaseIO.login(accountname, password);
         }
 
+        //RASMUS:
+        //Ovenover tjekker den om der er accounts gemt i databasen. Da den er false ved første kørsel af program, så
+        //vil den oprette en person på ny vha. FileIO nedenunder
 
         if( accounts == null || accounts.size() == 0){
             TextUI.sendMessage("No accounts in database, will start registering you now.");
